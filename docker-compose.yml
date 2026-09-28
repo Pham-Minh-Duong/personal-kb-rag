@@ -1,0 +1,31 @@
+services:
+  # Service 1: Vector Database (ChromaDB)
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: chromadb_rag
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+    restart: always
+
+  # Service 2: FastAPI RAG Application
+  web:
+    build: .
+    container_name: fastapi_rag_app
+    ports:
+      - "8001:8000"
+    environment:
+      - CHROMA_HOST=chroma
+      - CHROMA_PORT=8000
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+    depends_on:
+      - chroma
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always
+
+volumes:
+  chroma_data:
