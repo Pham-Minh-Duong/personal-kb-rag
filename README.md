@@ -1,39 +1,40 @@
 # 🧠 Personal Knowledge Base RAG Application (Second Brain)
 
-Ứng dụng Tra cứu & Quản lý Tri thức Cá nhân (Second Brain) xây dựng theo kiến trúc **RAG (Retrieval-Augmented Generation)** tối ưu cho tiếng Việt. Dự án được đóng gói hoàn chỉnh dạng microservices sử dụng **Docker & Docker Compose**, hỗ trợ chạy **Local 100%** không tốn chi phí.
+A local, privacy-focused **Personal Knowledge Base (Second Brain)** application built with a **Retrieval-Augmented Generation (RAG)** architecture optimized for Vietnamese and multi-language document processing. The entire system is microservice-architected and containerized using **Docker & Docker Compose**, running **100% locally** with zero external API costs.
 
 ---
 
-## 🌟 Tính năng nổi bật
-- **Local Privacy First:** Sử dụng Ollama (LLM Local) và ChromaDB giúp bảo mật toàn bộ dữ liệu ghi chú cá nhân.
-- **Tiếng Việt & Đa định dạng:** Hỗ trợ đọc và cắt nhỏ văn bản (Chunking) từ các định dạng `.docx`, `.pdf`, `.txt`.
-- **RESTful API:** Đóng gói bằng **FastAPI**, tích hợp sẵn Swagger UI trực quan cho việc test và tích hợp ứng dụng khác.
-- **Production-Ready Containerization:** Đóng gói toàn bộ FastAPI App và Vector DB trong cụm Docker Container, giúp khởi chạy trên bất kỳ máy tính nào chỉ với 1 câu lệnh.
+## 🌟 Key Features
+- **Local & Privacy-First:** Powered by **Ollama** (Local LLM) and **ChromaDB** (Local Vector DB) to ensure 100% data privacy for your personal notes and documents.
+- **Multi-Format Document Support:** Extracts, chunks, and indexes text seamlessly from `.docx`, `.pdf`, and `.txt` files.
+- **Production RESTful API:** Built with **FastAPI**, featuring built-in OpenAPI/Swagger UI documentation for easy testing and integration.
+- **Production-Ready Containerization:** Multi-container orchestrations via Docker Compose allow deployment on any platform with a single command.
 
 ---
 
-## 🛠️ Công nghệ & Công cụ sử dụng
-- **Môi trường phát triển:** VS Code, Antigravity IDE, Miniconda (Python 3.10)
-- **Framework & RAG Core:** FastAPI, LangChain, Sentence-Transformers (`all-MiniLM-L6-v2`)
+## 🛠️️ Tech Stack & Tools
+- **Development Environment:** VS Code / Cursor / Antigravity IDE, Miniconda (Python 3.10)
+- **Frameworks & RAG Engine:** FastAPI, LangChain, HuggingFace Sentence-Transformers (`all-MiniLM-L6-v2` / `paraphrase-multilingual-MiniLM-L12-v2`)
 - **Vector Database:** ChromaDB
 - **Local LLM Runner:** Ollama (Model: `llama3.2`)
-- **API Testing:** Bruno, Swagger UI, `curl` / `Invoke-RestMethod`
-- **Đóng gói & Triển khai:** Docker, Docker Compose
+- **API Testing:** Bruno, Swagger UI, `curl` / PowerShell `Invoke-RestMethod`
+- **Containerization & Orchestration:** Docker, Docker Compose
 
 ---
 
-## 📂 Cấu trúc dự án
+## 📂 Project Directory Structure
 
 ```text
 personal-kb-rag/
-├── data/                  # Thư mục chứa tài liệu/ghi chú cá nhân (.docx, .pdf, .txt)
-├── src/                   # Mã nguồn cốt lõi của RAG
-│   ├── __init__.py
-│   ├── document_loader.py # Xử lý đọc & cắt nhỏ văn bản (Chunking)
-│   ├── vector_db.py       # Khởi tạo & Lưu trữ Vector Embeddings vào ChromaDB
-│   └── rag_chain.py       # Luồng trích xuất dữ liệu & Truy vấn Ollama
-├── app.py                 # FastAPI Web Server (Endpoints /chat)
-├── requirements.txt       # Danh sách thư viện Python
-├── Dockerfile             # Multi-stage Docker build cho FastAPI App
-├── docker-compose.yml     # Quản lý cụm Container (FastAPI + ChromaDB)
-└── README.md              # Hướng dẫn dự án
+├── data/                  # Directory for personal documents (.docx, .pdf, .txt)
+├── src/                   # Core RAG source code
+│   ├── __init__.py        # Package initializer
+│   ├── document_loader.py # Document loading & chunking logic
+│   ├── vector_db.py       # ChromaDB initialization & vector embedding pipeline
+│   └── rag_chain.py       # Retrieval chain & Ollama LLM integration
+├── app.py                 # FastAPI application entry point (/chat endpoint)
+├── requirements.txt       # Python dependencies
+├── Dockerfile             # Container image definition for FastAPI app
+├── docker-compose.yml     # Multi-container orchestration (FastAPI + ChromaDB)
+├── .gitignore             # Git ignore file for temporary & generated files
+└── README.md              # Project documentation
